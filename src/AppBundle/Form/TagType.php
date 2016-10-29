@@ -9,6 +9,9 @@ namespace AppBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 /**
  * Class TagType.
@@ -26,7 +29,7 @@ class TagType extends AbstractType
     {
         $builder->add(
             'id',
-            'hidden'
+            HiddenType::class
         );
         if (isset($options['validation_groups'])
             && count($options['validation_groups'])
@@ -34,17 +37,16 @@ class TagType extends AbstractType
         ) {
             $builder->add(
                 'name',
-                'text',
+                TextType::class,
                 array(
                     'label'      => 'form.tag.name',
                     'required'   => true,
-                    'max_length' => 128,
                 )
             );
         }
         $builder->add(
             'save',
-            'submit',
+            SubmitType::class,
             array(
                 'label' => 'form.save'
             )

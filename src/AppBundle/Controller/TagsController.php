@@ -156,7 +156,7 @@ class TagsController
     public function addAction(Request $request)
     {
         $tagForm = $this->formFactory->create(
-            new TagType(),
+            'AppBundle\Form\TagType',
             null,
             array(
                 'validation_groups' => 'tag-default'
