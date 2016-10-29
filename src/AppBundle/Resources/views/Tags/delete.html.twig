@@ -1,0 +1,12 @@
+{% extends 'AppBundle::base.html.twig' %}
+
+{% block body %}
+    <h2>{{ 'tag.delete.title'|trans }}</h2>
+    <div>
+        {{ form_errors(form) }}
+    </div>
+    <p>
+        {{ 'tag.delete.confirm'|trans }}
+    </p>
+    {{ form(form, {'method': 'POST'}) }}
+{% endblock %}

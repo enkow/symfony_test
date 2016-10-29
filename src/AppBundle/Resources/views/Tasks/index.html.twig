@@ -1,0 +1,39 @@
+{% extends 'AppBundle::base.html.twig' %}
+
+{% block body %}
+    <h2>{{ 'tasks.list.title'|trans }}</h2>
+    {% if tasks|length %}
+        {% for task in tasks %}
+            <dl>
+                <dt>Title</dt>
+                <dd>{{ task.title }}</dd>
+                <dt>Notes</dt>
+                <dd>{{ task.notes }}</dd>
+                {% if task.tags|length %}
+                    <dt>Tags</dt>
+                    <dd>
+                        {% for tag in task.tags %}
+                            {{ tag.name }}<br />
+                        {% endfor %}
+                    </dd>
+                {% endif %}
+                <dt>Actions</dt>
+                <dd>
+                    <a href="{{ url('tasks-view', {'id': task.id}) }}" title="{{ 'labels.view'|trans }}">
+                        {{ 'labels.view'|trans }}
+                    </a>
+                    <a href="{{ url('tasks-edit', {'id': task.id}) }}" title="{{ 'labels.edit'|trans }}">
+                        {{ 'labels.edit'|trans }}
+                    </a>
+                    <a href="{{ url('tasks-delete', {'id': task.id}) }}" title="{{ 'labels.delete'|trans }}">
+                        {{ 'labels.delete'|trans }}
+                    </a>
+                </dd>
+            </dl>
+        {% endfor %}
+    {% else %}
+        <div>
+            No tasks found!
+        </div>
+    {% endif %}
+{% endblock %}

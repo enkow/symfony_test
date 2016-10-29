@@ -1,0 +1,44 @@
+services:
+
+  app.tag_repository:
+      class: Doctrine\ORM\EntityRepository
+      factory: ["@doctrine.orm.entity_manager", getRepository]
+      arguments:
+        - AppBundle\Entity\Tag
+
+  app.task_repository:
+      class: Doctrine\ORM\EntityRepository
+      factory: ["@doctrine.orm.entity_manager", getRepository]
+      arguments:
+        - AppBundle\Entity\Task
+
+  app.tag_form:
+    class: AppBundle\Form\TagType
+    tags:
+      - { name: form.type, alias: tag }
+
+  app.task_form:
+    class: AppBundle\Form\TaskType
+    tags:
+      - { name: form.type, alias: task }
+
+  app.tags_controller:
+    class: AppBundle\Controller\TagsController
+    arguments:
+      - '@translator'
+      - '@templating'
+      - '@session'
+      - '@router'
+      - '@app.tag_repository'
+      - '@form.factory'
+
+  app.tasks_controller:
+    class: AppBundle\Controller\TasksController
+    arguments:
+      - '@translator'
+      - '@templating'
+      - '@session'
+      - '@router'
+      - '@app.tag_repository'
+      - '@app.task_repository'
+      - '@form.factory'

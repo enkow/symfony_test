@@ -1,0 +1,23 @@
+{% extends 'AppBundle::base.html.twig' %}
+
+{% block body %}
+    <h2>Task details</h2>
+    {% if task|length %}
+        <dl>
+            <dt>Title</dt>
+            <dd>{{ task.title }}</dd>
+            {% if task.tags|length %}
+                <dt>Tags</dt>
+                <dd>
+                    {% for tag in task.tags %}
+                        {{ tag.name }}<br />
+                    {% endfor %}
+                </dd>
+            {% endif %}
+         </dl>
+    {% else %}
+        <div>
+            No data found!
+        </div>
+    {% endif %}
+{% endblock %}

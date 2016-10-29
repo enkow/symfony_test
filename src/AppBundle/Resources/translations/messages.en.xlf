@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="1">
+                <source>tags.list.title</source>
+                <target>Tags list</target>
+            </trans-unit>
+            <trans-unit id="2">
+                <source>labels.actions</source>
+                <target>Actions</target>
+            </trans-unit>
+            <trans-unit id="3">
+                <source>tags.labels.name</source>
+                <target>Name</target>
+            </trans-unit>
+            <trans-unit id="4">
+                <source>tags.messages.tags_not_found</source>
+                <target>Tags not found!</target>
+            </trans-unit>
+            <trans-unit id="5">
+                <source>labels.view</source>
+                <target>view</target>
+            </trans-unit>
+            <trans-unit id="6">
+                <source>tags.view.title</source>
+                <target>Tag details</target>
+            </trans-unit>
+            <trans-unit id="7">
+                <source>tags.messages.tag_not_found</source>
+                <target>Tag not found!</target>
+            </trans-unit>
+            <trans-unit id="8">
+                <source>tags.messages.success.add</source>
+                <target>New tag added!</target>
+            </trans-unit>
+            <trans-unit id="9">
+                <source>form.tag.name</source>
+                <target>Name</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

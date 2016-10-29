@@ -1,0 +1,15 @@
+{% extends 'AppBundle::base.html.twig' %}
+
+{% block body %}
+    <h2>{{ 'tags.view.title'|trans }}</h2>
+    {% if tag|length %}
+        <dl>
+            <dt>{{ 'tags.labels.name'|trans }}</dt>
+            <dd>{{ tag.name }}</dd>
+         </dl>
+    {% else %}
+        <div>
+            {{ 'tags.messages.tag_not_found'|trans }}
+        </div>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends 'AppBundle::base.html.twig' %}
+
+{% block body %}
+    <h2>{{ 'tags.list.title'|trans }}</h2>
+    <div>
+        <a href="{{ url('tags-add') }}" title="{{ 'labels.add'|trans }}">
+            {{ 'labels.add'|trans }}
+        </a>
+    </div>
+    {% if tags|length %}
+        {% for row in tags %}
+            <dl>
+                <dt>{{ 'tags.labels.name'|trans }}</dt>
+                <dd>{{ row.name }}</dd>
+                <dt>{{ 'labels.actions'|trans }}</dt>
+                <dd>
+                    <a href="{{ url('tags-view', {'id': row.id}) }}" title="{{ 'labels.view'|trans }}">
+                        {{ 'labels.view'|trans }}
+                    </a>
+                    <a href="{{ url('tags-edit', {'id': row.id}) }}" title="{{ 'labels.edit'|trans }}">
+                        {{ 'labels.edit'|trans }}
+                    </a>
+                    <a href="{{ url('tags-delete', {'id': row.id}) }}" title="{{ 'labels.delete'|trans }}">
+                        {{ 'labels.delete'|trans }}
+                    </a>
+                </dd>
+            </dl>
+        {% endfor %}
+    {% else %}
+        <div>
+            {{ 'tags.messages.tags_not_found'|trans }}
+        </div>
+    {% endif %}
+{% endblock %}

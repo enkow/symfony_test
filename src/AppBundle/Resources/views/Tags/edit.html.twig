@@ -1,0 +1,9 @@
+{% extends 'AppBundle::base.html.twig' %}
+
+{% block body %}
+    <h2>{{ 'tag.edit.title'|trans }}</h2>
+    <div>
+        {{ form_errors(form) }}
+    </div>
+    {{ form(form, {'method': 'POST'}) }}
+{% endblock %}
