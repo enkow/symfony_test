@@ -12,7 +12,6 @@ use Doctrine\Common\Persistence\ObjectRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
-use Symfony\Bundle\FrameworkBundle\Translation\Translator;
 use Symfony\Component\Form\FormFactory;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -167,7 +166,7 @@ class TasksController
     public function addAction(Request $request)
     {
         $taskForm = $this->formFactory->create(
-            new TaskType(),
+            TaskType::class,
             null,
             array(
                 'validation_groups' => 'task-default',
@@ -219,7 +218,7 @@ class TasksController
         }
 
         $taskForm = $this->formFactory->create(
-            new TaskType(),
+            TaskType::class,
             $task,
             array(
                 'validation_groups' => 'task-edit',
@@ -272,7 +271,7 @@ class TasksController
         }
 
         $taskForm = $this->formFactory->create(
-            new TaskType(),
+            TaskType::class,
             $task,
             array(
                 'validation_groups' => 'task-delete',

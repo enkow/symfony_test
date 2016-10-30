@@ -10,6 +10,13 @@ use AppBundle\Form\DataTransformer\TagDataTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+
 
 /**
  * Class TaskType.
@@ -30,7 +37,7 @@ class TaskType extends AbstractType
 
         $builder->add(
             'id',
-            'hidden'
+            HiddenType::class
         );
         if (isset($options['validation_groups'])
             && count($options['validation_groups'])
@@ -38,16 +45,15 @@ class TaskType extends AbstractType
         ) {
             $builder->add(
                 'title',
-                'text',
+                TextType::class,
                 array(
                     'label'      => 'form.task.title',
                     'required'   => true,
-                    'max_length' => 255,
                 )
             );
             $builder->add(
                 'notes',
-                'textarea',
+                TextareaType::class,
                 array(
                     'label'    => 'form.task.notes',
                     'required' => false,
@@ -55,7 +61,7 @@ class TaskType extends AbstractType
             );
             $builder->add(
                 $builder
-                    ->create('tags', 'text')
+                    ->create('tags', TextType::class)
                     ->addModelTransformer($tagDataTransformer)
             );
         }
@@ -65,11 +71,11 @@ class TaskType extends AbstractType
         ) {
             $builder->add(
                 'is_finished',
-                'choice',
+                ChoiceType::class,
                 array(
                     'choices'  => array(
-                        0 => 'form.task.is_finished.no',
-                        1 => 'form.task.is_finished.yes',
+                        'form.task.is_finished.no' => 0,
+                        'form.task.is_finished.yes' => 1,
                     ),
                     'required' => true
                 )
@@ -77,7 +83,7 @@ class TaskType extends AbstractType
         }
         $builder->add(
             'save',
-            'submit',
+            SubmitType::class,
             array(
                 'label' => 'form.save'
             )
@@ -89,7 +95,7 @@ class TaskType extends AbstractType
      *
      * @param OptionsResolverInterface $resolver
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
             array(
@@ -99,9 +105,8 @@ class TaskType extends AbstractType
         );
         $resolver->setRequired(array('tag_model'));
         $resolver->setAllowedTypes(
-            array(
-                'tag_model' => 'Doctrine\Common\Persistence\ObjectRepository'
-            )
+            'tag_model',
+            'Doctrine\Common\Persistence\ObjectRepository'
         );
     }
 
@@ -110,7 +115,7 @@ class TaskType extends AbstractType
      *
      * @return string Form name
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'task_form';
     }
