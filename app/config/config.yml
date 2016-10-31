@@ -75,6 +75,15 @@ assetic:
             inputs:
                 - %kernel.root_dir%/../vendor/components/jquery/jquery.js
 
+        admin_css:
+            inputs:
+                - %kernel.root_dir%/../src/AppBundle/Resources/public/adminLTE/dist/css/AdminLTE.min.css
+                - %kernel.root_dir%/../src/AppBundle/Resources/public/adminLTE/dist/css/skins/skin-blue.min.css
+            filters: [cssrewrite]
+        admin_js:
+            inputs:
+                - %kernel.root_dir%/../src/AppBundle/Resources/public/adminLTE/dist/js/app.min.js
+
 # Twig Configuration
 twig:
     debug:            "%kernel.debug%"
