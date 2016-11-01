@@ -1,9 +1,22 @@
-{% extends 'AppBundle::page.html.twig' %}
+{% extends 'AppBundle::admin/page.html.twig' %}
+
+{% block title %}
+  <i class="fa fa-plus"></i> Dodaj zadanie
+{% endblock %}
 
 {% block body %}
-    <h2>{{ 'task.add.title'|trans }}</h2>
-    <div>
-        {{ form_errors(form) }}
+  {{ form_start(form) }}
+    <div class="col-md-4">
+      {{ form_row(form.title) }}
     </div>
-    {{ form(form, {'method': 'POST'}) }}
+    <div class="col-md-4">
+      {{ form_row(form.notes) }}
+    </div>
+    <div class="col-md-4">
+      {{ form_row(form.tags) }}
+    </div>
+      {{ form_rest(form) }}
+      <div class="clearfix"></div>
+      <button type="submit" class="btn btn-success">Dodaj</button>
+  {{ form_end(form) }}
 {% endblock %}

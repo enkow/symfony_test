@@ -47,21 +47,37 @@ class TaskType extends AbstractType
                 'title',
                 TextType::class,
                 array(
-                    'label'      => 'form.task.title',
+                    'label'      => 'Tytuł',
                     'required'   => true,
+                    'attr' => array(
+                        'class' => 'form-control',
+                        'placeholder' => 'lol'
+                    )
                 )
             );
             $builder->add(
                 'notes',
                 TextareaType::class,
                 array(
-                    'label'    => 'form.task.notes',
+                    'label'    => 'Notatki',
                     'required' => false,
+                    'attr' => array(
+                        'class' => 'form-control',
+                        'placeholder' => 'lol',
+                    )
                 )
             );
             $builder->add(
                 $builder
-                    ->create('tags', TextType::class)
+                    ->create(
+                        'tags',
+                        TextType::class,
+                        array(
+                            'attr' => array(
+                                'class' => 'form-control',
+                            )
+                        )
+                    )
                     ->addModelTransformer($tagDataTransformer)
             );
         }
@@ -74,20 +90,16 @@ class TaskType extends AbstractType
                 ChoiceType::class,
                 array(
                     'choices'  => array(
-                        'form.task.is_finished.no' => 0,
-                        'form.task.is_finished.yes' => 1,
+                        'NIE' => 0,
+                        'TAK' => 1,
                     ),
-                    'required' => true
+                    'required' => true,
+                    'attr' => array(
+                        'class' => 'form-control',
+                    )
                 )
             );
         }
-        $builder->add(
-            'save',
-            SubmitType::class,
-            array(
-                'label' => 'form.save'
-            )
-        );
     }
 
     /**
