@@ -1,42 +1,32 @@
-{% extends 'AppBundle::page.html.twig' %}
+{% extends 'AppBundle::admin/page.html.twig' %}
 
-{% block title %}lol{% endblock %}
+{% block title %}{{ 'tasks.list.title'|trans }}{% endblock %}
 {% block subtitle %}asdsd{% endblock %}
 
 {% block body %}
-    <h2>{{ 'tasks.list.title'|trans }}</h2>
-    {% if tasks|length %}
+    <table class="data table">
+    <thead>
+        <tr>
+            <th class="id">#</th>
+            <th>nazwa</th>
+            <th>finish</th>
+            <th data-orderable="false"></th>
+        </tr>
+    </thead>
+    <tbody>
         {% for task in tasks %}
-            <dl>
-                <dt>Title</dt>
-                <dd>{{ task.title }}</dd>
-                <dt>Notes</dt>
-                <dd>{{ task.notes }}</dd>
-                {% if task.tags|length %}
-                    <dt>Tags</dt>
-                    <dd>
-                        {% for tag in task.tags %}
-                            {{ tag.name }}<br />
-                        {% endfor %}
-                    </dd>
-                {% endif %}
-                <dt>Actions</dt>
-                <dd>
-                    <a href="{{ url('tasks-view', {'id': task.id}) }}" title="{{ 'labels.view'|trans }}">
-                        {{ 'labels.view'|trans }}
-                    </a>
-                    <a href="{{ url('tasks-edit', {'id': task.id}) }}" title="{{ 'labels.edit'|trans }}">
-                        {{ 'labels.edit'|trans }}
-                    </a>
-                    <a href="{{ url('tasks-delete', {'id': task.id}) }}" title="{{ 'labels.delete'|trans }}">
-                        {{ 'labels.delete'|trans }}
-                    </a>
-                </dd>
-            </dl>
+            <tr>
+                <td>{{ task.title }}</td>
+                <td>{{ task.isFinished }}</td>
+                <td>
+                        <span class="label label-default bg-green">lol</span>
+                </td>
+                <td>
+                    <a href="" class="btn btn-warning deletable">asdasd</a>
+                    <a href="" class="btn btn-info">asd</a>
+                </td>
+            </tr>
         {% endfor %}
-    {% else %}
-        <div>
-            No tasks found!
-        </div>
-    {% endif %}
+    </tbody>
+</table>
 {% endblock %}

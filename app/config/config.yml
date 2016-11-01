@@ -83,6 +83,22 @@ assetic:
         admin_js:
             inputs:
                 - %kernel.root_dir%/../src/AppBundle/Resources/public/adminLTE/dist/js/app.min.js
+        datatables_css:
+            inputs:
+                - %kernel.root_dir%/../src/AppBundle/Resources/public/adminLTE/plugins/datatables/dataTables.bootstrap.css
+            filters: [cssrewrite]
+        datatables_js:
+            inputs:
+                - %kernel.root_dir%/../src/AppBundle/Resources/public/adminLTE/plugins/datatables/jquery.dataTables.min.js
+                - %kernel.root_dir%/../src/AppBundle/Resources/public/adminLTE/plugins/datatables/custom.js
+                - %kernel.root_dir%/../src/AppBundle/Resources/public/adminLTE/plugins/datatables/dataTables.bootstrap.js
+        sweetalert_css:
+            inputs:
+                - %kernel.root_dir%/../src/AppBundle/Resources/public/adminLTE/plugins/sweetalert/dist/sweetalert.css
+            filters: [cssrewrite]
+        sweetalert_js:
+            inputs:
+                - %kernel.root_dir%/../src/AppBundle/Resources/public/adminLTE/plugins/sweetalert/dist/sweetalert.min.js
 
 # Twig Configuration
 twig:

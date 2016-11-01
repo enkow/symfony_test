@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <title>Panel Administracyjny</title>
+    {% block stylesheets %}
+      {% stylesheets '@bootstrap_css' '@AppBundle/Resources/public/css/*' '@admin_css' '@datatables_css' '@sweetalert_css' %}
+        <link rel="stylesheet" type="text/css" media="screen" href="{{ asset_url }}"/>
+      {% endstylesheets %}
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+    {% endblock %}
+  </head>
+  <body class="hold-transition skin-blue sidebar-mini">
+    <div class="wrapper">
+      <header class="main-header">
+        <a href="" class="logo">
+          <span class="logo-mini"><b>A</b>LT</span>
+          <span class="logo-lg"><b>Admin</b>LTE</span>
+        </a>
+
+        <nav class="navbar navbar-static-top" role="navigation">
+          <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+            <span class="sr-only">Toggle navigation</span>
+          </a>
+        </nav>
+      </header>
+
+      <aside class="main-sidebar">
+        {% include 'AppBundle::admin/navbar.html.twig' %}
+      </aside>
+
+      <div class="content-wrapper">
+        {% block page %}{% endblock %}
+      </div>
+
+      <footer class="main-footer">
+        <div class="pull-right hidden-xs">Wykonanie <a href="">Grzesiek Stefański</a></div>
+        <strong>Copyright &copy; {{ "now"|date("Y") }} <a href="">Company</a>.</strong> Wszystkie prawa zastrzeżone.
+      </footer>
+
+    </div>
+
+    {% block javascripts %}
+      {% javascripts '@jquery' '@bootstrap_js' '@admin_js' '@datatables_js' '@sweetalert_js' %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+      {% endjavascripts %}
+      <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script>
+
+      <script>
+        $( document ).ready(function(){
+          $( document ).on('click', '.deletable', function(e){
+            e.preventDefault();
+            var button = $(this);
+            var custom = '';
+            if(button.attr('data-custom')){
+              var custom = "\n" + button.data('custom');
+            }
+            swal({
+              title: "Jesteś pewien?",
+              text: "Usuniętego obiektu nie będzie można przywrócić!" + custom,
+              type: "warning",
+              showCancelButton: true,
+              confirmButtonColor: "#DD6B55",
+              confirmButtonText: "Tak, jestem pewien",
+              cancelButtonText: "Anuluj",
+              closeOnConfirm: true,
+              closeOnCancel: true
+            }, function(c){
+              if(c) {
+                document.location = button.data('href');
+              }
+            });
+          });
+
+          $('table.table').not('.plain').each(function(){
+            createTable($(this));
+          });
+        });
+      </script>
+    {% endblock %}
+  </body>
+</html>
